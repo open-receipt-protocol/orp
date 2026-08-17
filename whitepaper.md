@@ -1,7 +1,7 @@
 ---
 title: "Competing on Quality, Not Attention"
 subtitle: "ORP (Open Receipt Protocol): accountable product discovery through AI hosts"
-status: Draft v1.0 — 2026-08-07
+status: Draft v1.0 (2026-08-07)
 ---
 
 # Competing on Quality, Not Attention
@@ -36,7 +36,7 @@ The contribution is the accountability loop: signed rating receipts that referen
 
 Early modeling of this dynamic points the same way. In a simulated agent-first market, where users state needs before choosing a platform (Hong et al. 2026), presentation manipulation occupies 73 to 78 percent of first-ranked positions, and host-authored outcome feedback reduces it only to 36 to 41 percent. The result is consistent with the thesis this paper argues: platform-authored accountability helps but leaves a large residual, and the missing piece is a record the platform cannot write, held by an operator that owns nothing.
 
-The intended result is a market that competes more on product quality and price and less on purchased attention, delivered alongside a public, continuously updating map of supply, demand, and quality signals. By reducing the information asymmetry that attention spend exploits, it narrows advertising toward its one honest function, informing people of genuine novelty. None of this depends on inventing new technology. The hard parts are assembled from proven components, so what stands between the thesis and a working system is endorsement, funding, and disciplined engineering — and, decisively, integration: the protocol becomes real the day a frontier host serves it. No research breakthrough is required.
+The intended result is a market that competes more on product quality and price and less on purchased attention, delivered alongside a public, continuously updating map of supply, demand, and quality signals. By reducing the information asymmetry that attention spend exploits, it narrows advertising toward its one honest function, informing people of genuine novelty. None of this depends on inventing new technology. The hard parts are assembled from proven components, so what stands between the thesis and a working system is endorsement, funding, disciplined engineering, and, decisively, integration: the protocol becomes real the day a frontier host serves it. No research breakthrough is required.
 
 Independent work of the last two years converges on the pieces this paper assembles: neutral data stewards and trust brokers as the missing institutional layer (Zable & Verhulst 2026), trust and provenance infrastructure for LLM-mediated information environments (Marchal et al. 2026), and gatekeeper conduct made checkable by recomputation (Kroehl 2026).
 

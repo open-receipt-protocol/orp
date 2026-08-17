@@ -1,6 +1,6 @@
 # ORP (Open Receipt Protocol)
 
-**Competing on Quality, Not Attention — accountable product discovery through AI hosts.**
+**Competing on Quality, Not Attention: accountable product discovery through AI hosts.**
 
 Control over how humanity discovers products and services is centralizing again. LLM hosts are becoming the interface between people and the digital world, the point where a person states a need and receives an answer, and whoever owns that orchestration between human demand and the world's supply owns the most valuable commercial dataset ever produced. This is the same convenient gateway that search engines, marketplaces, and social platforms each turned into a monopoly or oligopoly, after which the extraction of social welfare ramped up long before regulation caught up. It is happening again, on a larger surface, and the dataset will be produced whether or not anyone intends it. The only open question is who holds it. The default is that the dataset, and the recommendation engine built on it, come to rest inside a single private company, at a concentration of power no prior gateway reached and no government could match. This paper proposes an alternative.
 
@@ -14,14 +14,14 @@ ORP (Open Receipt Protocol) is a reciprocal public-good protocol for accountable
 
 The contribution is the accountability loop: signed rating receipts that reference the exact claims a recommendation was made on, produced by verified humans, tied to a recommendation the operator itself served, and held by an operator with nothing to sell. The matching around that loop is assembled from standard parts. A host that runs its own version of this cannot write these receipts, because everyone can see whose thumb is on the scale. This is what makes the quality signal hard to fake and hard to buy retroactively.
 
-The intended result is a market that competes more on product quality and price and less on purchased attention, delivered alongside a public, continuously updating map of supply, demand, and quality signals. By reducing the information asymmetry that attention spend exploits, it narrows advertising toward its one honest function, informing people of genuine novelty. None of this depends on inventing new technology. The hard parts are assembled from proven components, so what stands between the thesis and a working system is endorsement, funding, and disciplined engineering — and, decisively, integration: the protocol becomes real the day a frontier host serves it. No research breakthrough is required.
+The intended result is a market that competes more on product quality and price and less on purchased attention, delivered alongside a public, continuously updating map of supply, demand, and quality signals. By reducing the information asymmetry that attention spend exploits, it narrows advertising toward its one honest function, informing people of genuine novelty. None of this depends on inventing new technology. The hard parts are assembled from proven components, so what stands between the thesis and a working system is endorsement, funding, disciplined engineering, and, decisively, integration: the protocol becomes real the day a frontier host serves it. No research breakthrough is required.
 
 The window to shape this gateway is open while the industry is in transition and closes once the gateway sets. The core statement of this paper is: "The risk and opportunity are well understood and a social welfare positive solution is possible this time around. Please help make that a reality."
 
 ---
 
-**Read further.** The full argument, mechanism at altitude, and per-surface attack map: [white paper](whitepaper.md) ([PDF](whitepaper.pdf)). Engineering depth — identity, receipts, matching, transparency log: [Technical Overview](technical-overview.md).
+**Read further.** The full argument, mechanism at altitude, and per-surface attack map: [white paper](whitepaper.md) ([PDF](whitepaper.pdf)). Engineering depth (identity, receipts, matching, transparency log): [Technical Overview](technical-overview.md).
 
 **Status.** Draft v1.0 thesis (2026-08-07). It invites the scrutiny a claim-accountability protocol should hold itself to.
 
-**Author.** Niklas Henkel — contact via [issues](https://github.com/open-receipt-protocol/orp/issues). **License:** [CC BY 4.0](LICENSE).
+**Author.** Niklas Henkel; contact via [issues](https://github.com/open-receipt-protocol/orp/issues). **License:** [CC BY 4.0](LICENSE).

@@ -1,7 +1,7 @@
 ---
 title: "ORP (Open Receipt Protocol): Technical Overview"
 subtitle: The engineering-depth companion to the ORP white paper
-status: Draft — 2026-08-06
+status: Draft (2026-08-06)
 audience: protocol engineers, cryptographers, host and operator implementers, standards reviewers
 ---
 
