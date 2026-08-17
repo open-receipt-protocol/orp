@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>The discovery-then-accountability loop</title>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#444444"/></marker>
+    <marker id="arrowRef" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#8B3A3A"/></marker>
+    <marker id="arrowOp" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#8A6A2F"/></marker>
+    <marker id="arrowHost" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#56789E"/></marker>
+  </defs>
+
+  <!-- optional refinement: candidate set back to demand claims -->
+  <path d="M 450,55 C 428,22 327,22 305,55" fill="none" stroke="#56789E" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrowHost)"/>
+  <text x="378" y="18" text-anchor="middle" font-size="9.5" fill="#56789E">optional refinement</text>
+
+  <!-- top row: discovery, left to right -->
+  <g>
+    <rect x="20" y="56" width="160" height="54" rx="8" fill="#E9F1E1" stroke="#6E8F52" stroke-width="1.5"/>
+    <text x="100" y="79" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">Human need</text>
+    <text x="100" y="97" text-anchor="middle" font-size="8.5" letter-spacing="0.5" fill="#55703E">CONSUMER</text>
+  </g>
+  <g>
+    <rect x="207" y="56" width="160" height="54" rx="8" fill="#E1EAF5" stroke="#56789E" stroke-width="1.5"/>
+    <text x="287" y="79" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">Demand claims</text>
+    <text x="287" y="97" text-anchor="middle" font-size="8.5" letter-spacing="0.5" fill="#3E5E80">LLM HOST</text>
+  </g>
+  <g>
+    <rect x="394" y="56" width="160" height="54" rx="8" fill="#F6ECD9" stroke="#A98443" stroke-width="1.5"/>
+    <text x="474" y="79" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">Candidate set</text>
+    <text x="474" y="97" text-anchor="middle" font-size="8.5" letter-spacing="0.5" fill="#8A6A2F">OPERATOR</text>
+  </g>
+  <g>
+    <rect x="580" y="56" width="160" height="54" rx="8" fill="#E9F1E1" stroke="#6E8F52" stroke-width="1.5"/>
+    <text x="660" y="79" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">Acceptance</text>
+    <text x="660" y="97" text-anchor="middle" font-size="8.5" letter-spacing="0.5" fill="#55703E">CONSUMER</text>
+  </g>
+
+  <!-- bottom row: accountability, right to left -->
+  <g>
+    <rect x="580" y="226" width="160" height="54" rx="8" fill="#E1EAF5" stroke="#56789E" stroke-width="1.5"/>
+    <text x="660" y="249" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">Feedback</text>
+    <text x="660" y="267" text-anchor="middle" font-size="8.5" letter-spacing="0.5" fill="#3E5E80">LLM HOST + CONSUMER</text>
+  </g>
+  <g>
+    <rect x="394" y="226" width="160" height="54" rx="8" fill="#EBE3F1" stroke="#7D5E96" stroke-width="1.5"/>
+    <text x="474" y="249" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">Signed receipt</text>
+    <text x="474" y="267" text-anchor="middle" font-size="8.5" letter-spacing="0.5" fill="#63487A">LLM HOST + CONSUMER</text>
+  </g>
+  <g>
+    <rect x="20" y="226" width="160" height="54" rx="8" fill="#F6ECD9" stroke="#A98443" stroke-width="1.5"/>
+    <text x="100" y="249" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">Product Claims</text>
+    <text x="100" y="267" text-anchor="middle" font-size="8.5" letter-spacing="0.5" fill="#8A6A2F">COMPANIES + OPERATOR</text>
+  </g>
+
+  <!-- chain arrows -->
+  <line x1="181" y1="83" x2="205" y2="83" stroke="#444444" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="368" y1="83" x2="392" y2="83" stroke="#444444" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="555" y1="83" x2="578" y2="83" stroke="#444444" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="660" y1="111" x2="660" y2="224" stroke="#444444" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="666" y="162" font-size="9.5" fill="#4B5563">after a</text>
+  <text x="666" y="174" font-size="9.5" fill="#4B5563">minimum delay</text>
+  <line x1="578" y1="253" x2="556" y2="253" stroke="#444444" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="392" y1="253" x2="182" y2="253" stroke="#444444" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ratings feed the next match -->
+  <polyline points="100,225 100,180 425,180 425,112" fill="none" stroke="#8A6A2F" stroke-width="1.5" marker-end="url(#arrowOp)"/>
+  <text x="115" y="173" font-size="9.5" fill="#8A6A2F">per-claim ratings shape the next candidate set</text>
+
+  <!-- recommendation_ref closes the loop -->
+  <line x1="500" y1="225" x2="500" y2="112" stroke="#8B3A3A" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrowRef)"/>
+  <text x="508" y="144" font-size="10" font-family="Consolas, monospace" fill="#8B3A3A">recommendation_ref</text>
+  <text x="508" y="158" font-size="9" fill="#8B3A3A">cites the served</text>
+  <text x="508" y="170" font-size="9" fill="#8B3A3A">recommendation</text>
+</svg>
