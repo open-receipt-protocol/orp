@@ -1,15 +1,15 @@
 ---
 title: "ORP (Open Receipt Protocol): Technical Overview"
-subtitle: The engineering-depth companion to the ORP Architecture canon
-status: DRAFT 2026-08-06
+subtitle: The engineering-depth companion to the ORP white paper
+status: Draft — 2026-08-06
 audience: protocol engineers, cryptographers, host and operator implementers, standards reviewers
 ---
 
 # ORP (Open Receipt Protocol): Technical Overview
 
-> **What this document is.** The engineering-depth companion to the ORP Architecture canon. The Architecture answers what ORP is and why it exists; this document says exactly how each of its concepts works, at the depth needed to build against and to attack. Its scope is the canon's scope: it covers the concepts the Architecture carries and no others. It assumes Architecture-level context and does not re-argue the venture thesis, the operator's legal form, or go-to-market.
+> **What this document is.** The engineering-depth companion to the ORP white paper, [*Competing on Quality, Not Attention*](whitepaper.md). The white paper answers what ORP is and why it exists; this document says exactly how each of its concepts works, at the depth needed to build against and to attack. Its scope is the white paper's scope: it covers the concepts the white paper carries and no others. It assumes white-paper-level context and does not re-argue the thesis, the operator's legal form, or go-to-market.
 >
-> **Authority.** The Architecture canon is the sole design authority. Where any statement here conflicts with the canon, the canon wins. Section anchors of the form "Canon: Architecture §n" point to the concept each section deepens. Normative keywords (MUST, SHOULD, MAY) describe what a conforming implementation of the eventual protocol would do — the protocol itself is a proposal, and no implementation program is presumed. Where a statement traces to a ratified decision in the specification repository's ledger it is settled design; wire-level detail beyond that is drafted scaffolding showing the mechanism is buildable, open like everything else to specialist review.
+> **Authority.** The white paper is the statement of the design. Where any statement here conflicts with it, the white paper wins. Section anchors of the form "Canon: white paper §n" point to the concept each section deepens. Normative keywords (MUST, SHOULD, MAY) describe what a conforming implementation of the eventual protocol would do — the protocol itself is a proposal, and no implementation program is presumed. Statements marked "ratified (Dn)" trace to the project's internal decision ledger and are settled design; wire-level detail beyond that is drafted scaffolding showing the mechanism is buildable, open like everything else to specialist review.
 >
 > **Flag conventions.** `[PROPOSAL]` marks a best-fitting mechanism offered where the canon is deliberately silent, not a settled fact. `[PLACEHOLDER]` marks an illustrative value or name standing in for something test- or catalog-determined. `[ASSUMPTION]` marks an engineering assumption made to keep the text concrete. Nothing flagged is asserted as canon. All flags are collected in Appendix A. The design bias throughout is to state the shape of a mechanism and leave tuning open, minimizing needless attack surface.
 >
@@ -19,7 +19,7 @@ audience: protocol engineers, cryptographers, host and operator implementers, st
 
 ## T1. Claim model & compiler
 
-*Canon: Architecture §5.*
+*Canon: white paper §3.*
 
 ### T1.1 Text is canonical; the embedding is a derived index
 
@@ -77,7 +77,7 @@ Because claims can never be deleted, discoverability is only ever earned by diff
 
 ## T2. Manifest & product record
 
-*Canon: Architecture §5.*
+*Canon: white paper §3.*
 
 The claim manifest is the product's public, signed commitment: the object a company puts its name to and the operator countersigns. It is the entire supply-side authoring surface.
 
@@ -151,7 +151,7 @@ The product signature covers the canonical form (T1.3); the registry countersign
 
 ## T3. Conditionals & product parameters
 
-*Canon: Architecture §5.*
+*Canon: white paper §3.*
 
 Conditionals and parameters are the protocol's two **structured** scoping constructs: the only machine-filterable surface in a design whose sole free text is the claim itself. Both draw on one shared key/value catalog and are matched by filtering, never by embedding.
 
@@ -214,7 +214,7 @@ Conditionals and parameters are **hard filters** applied somewhere within the se
 
 ## T4. Demand claims & matching
 
-*Canon: Architecture §6.*
+*Canon: white paper §3.*
 
 Matching is the discovery half of the protocol. The canon is explicit that this is not where the novelty budget is spent (§14): claim-space matching and coverage aggregation are standard parts, deliberately assembled; the contribution is the accountability loop (T5 to T7), not the matcher. This section specifies the assembly precisely enough to build and attack, and no further.
 
@@ -267,7 +267,7 @@ When several of one product's claims match a single demand claim in-radius, whic
 
 > **The lowest-rated in-radius claim represents the product.**
 
-The reasoning is adversarial-first. Closest-distance would reward positional wordsmithing; highest-rated would let a product hide a weak claim behind a strong near-synonym. **Lowest-rated makes holding several claims over one region worthless by construction**: nothing is gained by claim-spraying a region, which is what keeps claim-engine-optimization pointless (Architecture §6, §15).
+The reasoning is adversarial-first. Closest-distance would reward positional wordsmithing; highest-rated would let a product hide a weak claim behind a strong near-synonym. **Lowest-rated makes holding several claims over one region worthless by construction**: nothing is gained by claim-spraying a region, which is what keeps claim-engine-optimization pointless (white paper §3, Appendix A.1).
 
 `[PROPOSAL]` **Tiebreak among several claims sharing the low rating:** deterministic and non-gameable, for example the lexicographically smallest `claim_id` (equivalently, oldest registration, since IDs are assigned in order). This detail does not change the design; flagged, not settled.
 
@@ -286,7 +286,7 @@ The operator performs **no LLM step at query time**: marginal cost per query is 
 | Field | Req | Description |
 |---|---|---|
 | `orp_version` | MUST | Document revision |
-| `recommendation_ref` | MUST | Opaque operator-scoped id minted at query time, resolvable to the serving instantiation under federation (Architecture §13); the choice-record anchor later receipts reference (T6) |
+| `recommendation_ref` | MUST | Opaque operator-scoped id minted at query time, resolvable to the serving instantiation under federation (white paper §8); the choice-record anchor later receipts reference (T6) |
 | `matcher` | MUST | `{ embedding_model, version }`, the pinned model this matching ran under |
 | `epoch` | MUST | The rating-publication epoch the response's rating-derived values come from (T10) |
 | `supply` | MUST | `{ eligible, full_coverage }`, see T4.9 |
@@ -334,7 +334,7 @@ unrated | stale | few | moderate | many
 
 ### T4.11 Synonym linking `[PROPOSAL]`
 
-The registry maintains a link layer over claim embeddings known to be semantically equivalent: claims in one **synonym family** are treated as co-located for matching, so a product claim matches a demand claim whenever any member of its family is in-radius. Links live registry-side and never change any claim's canonical text or identity (T1.4). The layer's existence is the canon commitment (Architecture §6); everything below is `[PROPOSAL]`-grade mechanism.
+The registry maintains a link layer over claim embeddings known to be semantically equivalent: claims in one **synonym family** are treated as co-located for matching, so a product claim matches a demand claim whenever any member of its family is in-radius. Links live registry-side and never change any claim's canonical text or identity (T1.4). The layer's existence is the canon commitment (white paper §3); everything below is `[PROPOSAL]`-grade mechanism.
 
 - **Admission:** how equivalence is established is open: operator batch analysis over the demand map, product petition, or both.
 - **Recomputability:** the link table is published on the public layer (T10.2) and versioned, so a historical match stays third-party recomputable from the pinned model plus the link-table version in force at match time (T4.2).
@@ -343,19 +343,19 @@ The registry maintains a link layer over claim embeddings known to be semantical
 
 ### T4.12 Authoring references: Host SDK and Product SDK `[PLACEHOLDER]`
 
-One register, two authoring surfaces. The Product SDK authors claims through the compiler rubric (T1.3); the Host SDK authors demand claims under the same functional discipline (T4.2). The success criterion is fixed by the canon (Architecture §16): independent hosts and products describing the same function land within matching distance without coordination. The normative rubric itself is the authoring contract, a separate artifact this Overview deliberately does not specify (T1.3, T3.3). This section is the reserved anchor for the SDK reference material once that artifact exists; until then, everything SDK-facing in this document is limited to the discipline statements in T1.3 and T4.2.
+One register, two authoring surfaces. The Product SDK authors claims through the compiler rubric (T1.3); the Host SDK authors demand claims under the same functional discipline (T4.2). The success criterion is fixed by the canon (white paper §5): independent hosts and products describing the same function land within matching distance without coordination. The normative rubric itself is the authoring contract, a separate artifact this Overview deliberately does not specify (T1.3, T3.3). This section is the reserved anchor for the SDK reference material once that artifact exists; until then, everything SDK-facing in this document is limited to the discipline statements in T1.3 and T4.2.
 
 ### T4.13 Synthetic matching evaluation `[PLACEHOLDER]`
 
-A hand-adjudicable, end-to-end test of the authored pipeline before real receipts exist: the author writes and signs off plausible product claims for a test catalog in a familiar consumer domain; an LLM host running the Host SDK prompt turns stated needs into demand claims; the harness measures how well those demand claims find the right products. It exercises SDK prompts, embedder, and radius together, which is what justifies radius, embedder, and authoring-rubric choices before deployment (Architecture §16). It is dev tooling, not protocol: no wire surface, no schema, no operator obligation. This section is the reserved anchor for the harness description once it exists.
+A hand-adjudicable, end-to-end test of the authored pipeline before real receipts exist: the author writes and signs off plausible product claims for a test catalog in a familiar consumer domain; an LLM host running the Host SDK prompt turns stated needs into demand claims; the harness measures how well those demand claims find the right products. It exercises SDK prompts, embedder, and radius together, which is what justifies radius, embedder, and authoring-rubric choices before deployment (white paper §5). It is dev tooling, not protocol: no wire surface, no schema, no operator obligation. This section is the reserved anchor for the harness description once it exists.
 
 ---
 
 ## T5. Receipt envelope & signing
 
-*Canon: Architecture §7.*
+*Canon: white paper §3.*
 
-The receipt is the protocol's core novelty: a record about a product that the product cannot write, veto, or shape (Architecture §7, §14). The envelope is what makes that structural. This section specifies the shared signing profile used by both receipts and manifests; T6 specifies the rating-receipt payload on top of it.
+The receipt is the protocol's core novelty: a record about a product that the product cannot write, veto, or shape (white paper §3). The envelope is what makes that structural. This section specifies the shared signing profile used by both receipts and manifests; T6 specifies the rating-receipt payload on top of it.
 
 ### T5.1 A role-addressed multi-signature envelope
 
@@ -422,7 +422,7 @@ An implementation program MUST publish envelope **test vectors** (a fixed `body`
 
 ## T6. Rating payload & outcomes
 
-*Canon: Architecture §7.*
+*Canon: white paper §3.*
 
 The rating receipt records **one elicitation event**: the closing of the loop a recommendation opened. There is exactly one receipt type in this version.
 
@@ -448,7 +448,7 @@ Attestation semantics follow the parties, not a per-outcome kind:
 
 **No product signature, structurally.** No receipt's validity references a product signature, so no product can veto, delay, or shape a record about itself; a low score exists regardless of the product's cooperation (T5.3).
 
-**Fabrication bound.** Every receipt MUST reference a `recommendation_ref`, and the operator served every recommendation a receipt can reference (T4.8). A host cannot manufacture follow-ups for recommendations that never happened; per-host receipt counts against served-recommendation counts are an operator-side consistency check (T12). Under the federated end-state the same check runs per member: a member's receipt flow is verifiable by its peers against the recommendations it served (Architecture §13).
+**Fabrication bound.** Every receipt MUST reference a `recommendation_ref`, and the operator served every recommendation a receipt can reference (T4.8). A host cannot manufacture follow-ups for recommendations that never happened; per-host receipt counts against served-recommendation counts are an operator-side consistency check (T12). Under the federated end-state the same check runs per member: a member's receipt flow is verifiable by its peers against the recommendations it served (white paper §8).
 
 ### T6.3 Elicitation record
 
@@ -476,13 +476,13 @@ Each `outcomes` entry is the attribution record for one *(demand claim, product 
 
 **Scores are the only outcome kind.** The user either confirms a score or skips; **skips, silence, and interrupted elicitations produce no receipt at all**, because silence cannot be signed. Hosts SHOULD report those as off-receipt operator telemetry (asked-at, no-response) so funnel statistics stay complete (T12).
 
-The array lists **rated claims only**. A claim the host never raised, or the user declined to rate, is omitted rather than marked; the full claim set of the recommendation is recoverable via `recommendation_ref`. There is **no user-supplied whole-product rating**: outcomes are per-claim, and any product-level aggregate is derived operator-side, stays internal, and is never published or queryable (T9). A summary number would be exactly the quotable global object the no-global-scores rule exists to prevent (Architecture §9).
+The array lists **rated claims only**. A claim the host never raised, or the user declined to rate, is omitted rather than marked; the full claim set of the recommendation is recoverable via `recommendation_ref`. There is **no user-supplied whole-product rating**: outcomes are per-claim, and any product-level aggregate is derived operator-side, stays internal, and is never published or queryable (T9). A summary number would be exactly the quotable global object the no-global-scores rule exists to prevent (white paper §5).
 
 ---
 
 ## T7. Elicitation timing & conduct
 
-*Canon: Architecture §7.*
+*Canon: white paper §3.*
 
 Elicitation is how a receipt comes to exist. Its rules are settled; its content (template wording, longitudinal schedules) is deliberately open.
 
@@ -533,15 +533,15 @@ A future host-witnessed primitive attesting that the user "made the product avai
 
 ## T8. Identity & privacy
 
-*Canon: Architecture §8.*
+*Canon: white paper §4.*
 
-Identity is the scarce resource the whole accountability layer rests on: a rating is worth something only because a real human, counted once, produced it. This is where the novelty budget is genuinely spent (Architecture §14), alongside receipts and incentives.
+Identity is the scarce resource the whole accountability layer rests on: a rating is worth something only because a real human, counted once, produced it. This is where the novelty budget is genuinely spent, alongside receipts and incentives.
 
 ### T8.1 Two-tier scope
 
 Identity is two-tier, and the tiers have opposite visibility:
 
-- **Root, protocol-scoped, never on the wire.** One unique-human identity **per human**, a **zero-knowledge proof-of-personhood nullifier** derived with a protocol-level scope shared by every operator instantiation (Architecture §13, D27), so the same human resolves to the same root at every member: the operator learns only that a unique human exists and which receipts are theirs, nothing else. **No name, contact data, or demographics exist anywhere in the system**; the root is unresolvable to a person by the operator, an auditor, or a subpoena. The root and everything derived from it (the identity graph, per-rater credibility histories) are **operator-only closed data** (T10 layer 4), used solely for fraud prevention and credibility weighting.
+- **Root, protocol-scoped, never on the wire.** One unique-human identity **per human**, a **zero-knowledge proof-of-personhood nullifier** derived with a protocol-level scope shared by every operator instantiation (white paper §8; D27), so the same human resolves to the same root at every member: the operator learns only that a unique human exists and which receipts are theirs, nothing else. **No name, contact data, or demographics exist anywhere in the system**; the root is unresolvable to a person by the operator, an auditor, or a subpoena. The root and everything derived from it (the identity graph, per-rater credibility histories) are **operator-only closed data** (T10 layer 4), used solely for fraud prevention and credibility weighting.
 - **Wire pseudonym, product-scoped, what receipts carry.** `subject.nullifier` is a **per-product pseudonym derived from the root under operator-held salt**. This projection is **MANDATORY**: cross-product identifiers MUST NOT appear on receipts, so receipts are **unlinkable across products** for products, hosts, auditors outside gated access, and every third party. Linkage exists only at the operator, as closed audited data. **Unlinkability is a wire property, not an operator property.**
 
 `subject.scheme` names the identity scheme and is deliberately **vendor-agnostic** (an open string). Proof-of-personhood via ZK nullifiers is the designed mechanism; a specific provider (for example a WorldID-class implementation) is one candidate, never a dependency.
@@ -582,9 +582,9 @@ Minimization-by-architecture is the backbone of the posture: the linkage never l
 
 ## T9. Scoring & incentives
 
-*Canon: Architecture §9.*
+*Canon: white paper §5.*
 
-Scoring is deliberately austere. The design's stance is that most "sophistication" in a reputation score is where the gaming industry grows (the FICO cautionary tale, Architecture §14); ORP keeps the arithmetic minimal and pushes robustness into scarcity (identity, real usage, calendar time, T8, T10) instead of into secret formulas.
+Scoring is deliberately austere. The design's stance is that most "sophistication" in a reputation score is where the gaming industry grows (the FICO cautionary tale); ORP keeps the arithmetic minimal and pushes robustness into scarcity (identity, real usage, calendar time, T8, T10) instead of into secret formulas.
 
 ### T9.1 Delivery per claim is the whole score
 
@@ -612,7 +612,7 @@ Below the floor, **absence of a rating plus the `sample_tier` = `unrated` signal
 
 ### T9.3 Portfolio aggregation: internal only
 
-Aggregation runs **per-claim → product → company**. The product and company aggregates exist **strictly internally** and serve exactly two purposes: **recommendation-time trust multipliers** (T4.4) and the **claim-spam penalty** ("you can't hide 995 bad claims behind 5 good ones", Architecture §9). Their value is **never stated on any surface, to anyone, at any granularity**. Publishing them would invite witch hunts and brand-versus-brand competition outside the system (marketing through the back door) and would misdescribe products: a 3.5-average product whose five claims a given consumer needs all sit at 4.4+ is excellent for that consumer. Leveraging exactly that differentiation is the point of the protocol; fraud is already handled inside recommendation and needs no audience.
+Aggregation runs **per-claim → product → company**. The product and company aggregates exist **strictly internally** and serve exactly two purposes: **recommendation-time trust multipliers** (T4.4) and the **claim-spam penalty** ("you can't hide 995 bad claims behind 5 good ones", white paper §5). Their value is **never stated on any surface, to anyone, at any granularity**. Publishing them would invite witch hunts and brand-versus-brand competition outside the system (marketing through the back door) and would misdescribe products: a 3.5-average product whose five claims a given consumer needs all sit at 4.4+ is excellent for that consumer. Leveraging exactly that differentiation is the point of the protocol; fraud is already handled inside recommendation and needs no audience.
 
 `[PLACEHOLDER]` The aggregation form at each level (how per-claim composites roll up, how spray drags the product aggregate) is an open scoring-semantics question, not fixed here.
 
@@ -640,19 +640,19 @@ Every scoring knob is an **open range**, never fabricated here (consolidated in 
 
 > default prior · recency-weight profile · staleness window and its activity scaling · archive-penalty schedule (base, escalation while trust regenerates, trust-regeneration rate) · stale/unrated-claim drag strength · rating-floor level (lifetime).
 
-These are design, measurement, and tuning questions for specialists and operator experimentation; none is a protocol deal-breaker (Architecture §9, §16).
+These are design, measurement, and tuning questions for specialists and operator experimentation; none is a protocol deal-breaker (white paper §5).
 
 ---
 
 ## T10. Transparency model
 
-*Canon: Architecture §10, §13, §17.*
+*Canon: white paper §6, §8.*
 
 The guiding principle: **as transparent as possible without sabotaging the mission.** Trust for adoption comes from structure (the governance lock, audits, inclusion proofs), not from published numbers. "Public" means the structure and verifiability of the three graphs; row-level data follows the residency layers below.
 
 ### T10.1 Append-only commitment chain (CT model)
 
-Receipt digests are committed to an **append-only public commitment chain** on the Certificate Transparency model: gated raw data is continuously verifiable against public commitments, and inclusion proofs let anyone check that a given receipt is in the log. The chain holds **digests only**, never receipt contents, which is what lets GDPR erasure run against the raw store without breaking the chain (T8.4). Under the federated end-state every operator instantiation appends to and verifies this one chain, which supplies the split-view monitoring ecosystem the CT model otherwise assumes (Architecture §13); append ordering and conflict handling between members are an open federation item (T13). `[PLACEHOLDER]` **The chain append batch cadence** is an operator parameter: digests attribute nothing, but fine-grained receipt-arrival timing correlated with an epoch jump is correlation material a batch cadence cheaply removes. Archive-never-delete plus permanent receipts on an append-only chain is an unboundedly growing structure; production key-transparency deployments identify log compaction as an operational necessity at scale (Parakeet, NDSS 2023). A compaction or checkpointing story that preserves inclusion-proof verifiability is an open build item (T13).
+Receipt digests are committed to an **append-only public commitment chain** on the Certificate Transparency model: gated raw data is continuously verifiable against public commitments, and inclusion proofs let anyone check that a given receipt is in the log. The chain holds **digests only**, never receipt contents, which is what lets GDPR erasure run against the raw store without breaking the chain (T8.4). Under the federated end-state every operator instantiation appends to and verifies this one chain, which supplies the split-view monitoring ecosystem the CT model otherwise assumes (white paper §8); append ordering and conflict handling between members are an open federation item (T13). `[PLACEHOLDER]` **The chain append batch cadence** is an operator parameter: digests attribute nothing, but fine-grained receipt-arrival timing correlated with an epoch jump is correlation material a batch cadence cheaply removes. Archive-never-delete plus permanent receipts on an append-only chain is an unboundedly growing structure; production key-transparency deployments identify log compaction as an operational necessity at scale (Parakeet, NDSS 2023). A compaction or checkpointing story that preserves inclusion-proof verifiability is an open build item (T13).
 
 ### T10.2 Four data-residency layers
 
@@ -669,7 +669,7 @@ There is no company-scoped diagnostics tier: the operator sells nothing to anyon
 
 ### T10.3 Epoch publication
 
-Every rating-derived value on any query or publication surface updates **only at epoch boundaries**. The rule is normative, not operator policy: even the company's own-numbers tier (layer 3), the sharpest adversary (jump-time correlation against its own user sessions), gets no fresher feed. The boundary is also where the operator's instantiations sync state and recompute over the merged receipt set (Architecture §13), so publication stays joint and no member is a fresher feed than another. Boundary semantics:
+Every rating-derived value on any query or publication surface updates **only at epoch boundaries**. The rule is normative, not operator policy: even the company's own-numbers tier (layer 3), the sharpest adversary (jump-time correlation against its own user sessions), gets no fresher feed. The boundary is also where the operator's instantiations sync state and recompute over the merged receipt set (white paper §8), so publication stays joint and no member is a fresher feed than another. Boundary semantics:
 
 - **Conjunctive:** a value recomputes only if **both** a minimum period **P** has elapsed **and** at least **k** new admissible ratings have accumulated since the last update; otherwise it carries forward unchanged. A conjunctive rule is necessary: a pure fixed-period rule leaks at low volume (a period containing one rating is that rating), and a pure threshold rule has no cadence floor.
 - **The distinct-rater floor** (T9.2) gates publication: below the floor, no composite at all.
@@ -691,11 +691,11 @@ The behavioral fraud and quarantine detectors are the **single** component kept 
 
 > **Detectors are secret; actions never are. Every quarantine is subtract-only and carries a logged justification.** Secrecy can remove fraud from a score, never add score, so a secret layer can never move a score upward, and an auditor can verify that every quarantine carries a recorded justification and sample-test decisions without learning detector internals.
 
-`[PLACEHOLDER]` Under the federated end-state peer instantiations supply the audit by construction, cross-auditing one another's quarantine patterns for target-selection bias (Architecture §13). The external audit instrument for the pre-federation state (how a non-member auditor samples and verifies) is undesigned: a success criterion, not a mechanism (Architecture §16).
+`[PLACEHOLDER]` Under the federated end-state peer instantiations supply the audit by construction, cross-auditing one another's quarantine patterns for target-selection bias (white paper §8). The external audit instrument for the pre-federation state (how a non-member auditor samples and verifies) is undesigned: a success criterion, not a mechanism (white paper §5).
 
 ### T10.6 Why open math doesn't Goodhart
 
-This is the argument the transparency model rests on (Architecture §10, §17), summarized per surface because it is the sharpest objection the design faces (the FICO precedent, Architecture §14):
+This is the argument the transparency model rests on (white paper §6), summarized per surface because it is the sharpest objection the design faces (the FICO precedent):
 
 | Surface | Why open math is safe |
 |---|---|
@@ -712,7 +712,7 @@ The pattern: **every open surface is either self-aligned or gated by scarce real
 
 ## T11. Demand commons
 
-*Canon: Architecture §11.*
+*Canon: white paper §7.*
 
 The demand commons is the primary public good the protocol produces: a live, continuously updating map of market demand and supply saturation, addressed to everyone and owned by no one. It is not a per-company service, and under the non-profit mission nothing about it is operator discretion: publishing the gap and saturation map is a mandatory output of running the protocol with a neutral operator.
 
@@ -741,7 +741,7 @@ Nobody with ownership of a cataloged product may be part of the non-profit opera
 
 ## T12. Host calibration
 
-*Canon: Architecture §12.*
+*Canon: white paper §2.*
 
 Per-host calibration is the protocol's answer to a structural gap: **the operator cannot audit host translation honesty from its own data**, because the user's raw need never reaches it (T4.2). Calibration is the external audit that replaces the one the operator structurally cannot perform, and the single public surface on which **hosts are named** (products never are).
 
@@ -768,7 +768,7 @@ The canon leaves the how open. A best-fitting, proposal-grade construction:
 
 ## T13. Parameters as open ranges
 
-*Canon: Architecture §9, §16.*
+*Canon: white paper §5.*
 
 Every tunable in the protocol is consolidated here as a **flagged open range, never a specification.** This is deliberate and load-bearing: the canon's discipline is that the paper defines success and does not owe every mechanism (§16), and the drafting instruction is to minimize needless attack surface by biasing to proposal-grade placeholders over exhaustive specification. Fixing these numbers here would invent settled facts the design does not have, and hand adversaries a fixed target. Each is a design, measurement, or tuning question for specialists and operator experimentation; **none is a protocol deal-breaker.**
 
@@ -798,7 +798,7 @@ Every tunable in the protocol is consolidated here as a **flagged open range, ne
 | **archive-penalty schedule** | priced-reset cost and trust regeneration | base, escalation while trust regenerates, regeneration rate; open | T9.6, T9.7 |
 | **demand-commons heat-map granularity** | gap/saturation aggregation | open measurement-design question | T11.2 |
 | **calibration metric & thresholds** | per-host consistency benchmark | `[PROPOSAL]` divergence in embedding + set space; probe set rotated to resist gaming | T12.3 |
-| **federation member count** | operator instantiations at end-state | likely 3 or 5 (DNS-root precedent); launch at 1 (D27) | Architecture §13 |
+| **federation member count** | operator instantiations at end-state | likely 3 or 5 (DNS-root precedent); launch at 1 (D27) | white paper §8 |
 | **member sync protocol** | state merge, append ordering, conflict handling between members | open federation item, post-paper (with the conformance criteria) | T10.1, T10.3 |
 
 ### T13.2 What is not open
@@ -816,10 +816,10 @@ For traceability. Nothing below blocks the white paper; each is either proposal-
 - **Recorded, not open: receipt attribution (T6.4).** `claim_id` only; no `product_claim_text` legibility copy.
 - **`[PROPOSAL]`: intent registration (T11.3).** Coordination construct on the commons; expiry and pool semantics proposal-grade, no escrow.
 - **`[PROPOSAL]`: synonym linking (T4.11).** The layer's existence is canon; admission, link-table representation, and migration are proposal-grade.
-- **`[PLACEHOLDER]`: authoring references and synthetic matching evaluation (T4.12, T4.13).** Reserved anchors for the authoring contract's SDK references and the pre-receipt evaluation harness; both artifacts live outside this Overview (Architecture §16).
+- **`[PLACEHOLDER]`: authoring references and synthetic matching evaluation (T4.12, T4.13).** Reserved anchors for the authoring contract's SDK references and the pre-receipt evaluation harness; both artifacts live outside this Overview (white paper §5).
 - **`[PLACEHOLDER]`: rating band width and hysteresis rule (T10.3).** The banded-publication rule is settled; its width and rule are test-determined.
 - **`[PROPOSAL]`: per-host calibration measurement (T12.3)** and **`[PLACEHOLDER]`: all scoring, epoch, and heat-map knobs (T13.1).** Canon-silent tuning surfaces; proposed at shape level, numbers left open.
 - **`[ASSUMPTION]`: canonicalizer as a pinned LLM stage (T1.3).** Determinism is a quality concern; injection resistance is a trust dependency, because the canonicalizer's adversary is the submitting company and human approval is no defense (D28). The defense is architectural, never prompt-level, and the operator MAY sample-check registered claim texts.
-- **Catalog keys throughout (T3).** Every `key` named is `[PLACEHOLDER]`: illustrative, never a reservation; the catalog is the authoring contract's artifact (Architecture §16).
+- **Catalog keys throughout (T3).** Every `key` named is `[PLACEHOLDER]`: illustrative, never a reservation; the catalog is the authoring contract's artifact (white paper §5).
 
-*End of the ORP (Open Receipt Protocol) Technical Overview, sections T1 to T13. Companion to the Architecture canon; the engineering-depth counterpart to Architecture §§5 to 12.*
+*End of the ORP (Open Receipt Protocol) Technical Overview, sections T1 to T13. The engineering-depth companion to the ORP white paper, "Competing on Quality, Not Attention".*
