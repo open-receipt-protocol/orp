@@ -10,7 +10,7 @@ The contribution is the accountability loop: signed rating receipts that referen
 
 ## Read
 
-- **[One-page abstract](ABSTRACT.md)**: start here.
+- **[One-page abstract](ABSTRACT.md)** ([PDF](abstract.pdf)): start here.
 - **[White paper](whitepaper.md)** ([PDF](whitepaper.pdf)): the full thesis. The centralization problem, the parties and their incentives, the core mechanism, identity and privacy, scoring, the transparency model, operator neutrality, and a per-surface attack map.
 - **[Technical Overview](technical-overview.md)**: the engineering-depth companion. How each concept works, at the depth needed to build against and to attack.
 
